@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./CSS/style.css" />
+    <title>Шлях</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <form action="" method="get">
+        <fieldset>
+          <legend>шлях</legend>
+          <input type="text" id="searchInput" placeholder="Пошук..." />
+          <select id="mySelect">
+            <option value="">Виберіть шлях</option>
+          </select>
+          <input
+            type="text"
+            name="add-new-way"
+            id="add-new-way"
+            placeholder="вести новий шлях"
+          />
+          <label for="way-text"></label>
+          <input type="button" id="addButton" value="Додати" />
+        </fieldset>
+        <fieldset>
+          <legend>час</legend>
+          <label for="add-start-time">час початку</label>
+          <input type="time" name="add-start-time" id="add-start-time" />
+          <label for="add-end-time">час кінця</label>
+          <input type="time" name="add-end-time" id="add-end-time" />
+        </fieldset>
+        <input type="button" value="готово" />
+      </form>
+    </div>
+    <script src="./js/way.js"></script>
+  </body>
+</html>
