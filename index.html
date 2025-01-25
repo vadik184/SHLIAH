@@ -14,21 +14,39 @@
   </head>
   <body>
     <div class="main-container">
-      <form action="" method="get">
+      <form action="">
         <fieldset>
           <legend>шлях</legend>
-          <input type="text" id="searchInput" placeholder="Пошук..." />
-          <select id="mySelect">
-            <option value="">Виберіть шлях</option>
-          </select>
-          <input
-            type="text"
-            name="add-new-way"
-            id="add-new-way"
-            placeholder="вести новий шлях"
-          />
-          <label for="way-text"></label>
-          <input type="button" id="addButton" value="Додати" />
+          <fieldset>
+            <legend>звідки</legend>
+            <input type="text" id="searchInput" placeholder="Пошук..." />
+            <select id="mySelectFrom">
+              <option value="">Виберіть шлях</option>
+            </select>
+            <input
+              type="text"
+              name="add-new-way-from"
+              id="add-new-way-from"
+              placeholder="вести новий шлях"
+            />
+            <label for="add-new-way-from"></label>
+            <input type="button" id="addButtonFrom" value="Додати" />
+          </fieldset>
+          <fieldset>
+            <legend>куди</legend>
+            <input type="text" id="searchInput" placeholder="Пошук..." />
+            <select id="mySelectTo">
+              <option value="">Виберіть шлях</option>
+            </select>
+            <input
+              type="text"
+              name="add-new-way-to"
+              id="add-new-way-to"
+              placeholder="вести новий шлях"
+            />
+            <label for="add-new-way-to"></label>
+            <input type="button" id="addButtonTo" value="Додати" />
+          </fieldset>
         </fieldset>
         <fieldset>
           <legend>час</legend>
@@ -40,6 +58,6 @@
         <input type="button" value="готово" />
       </form>
     </div>
-    <script src="./js/way.js"></script>
+    <script src="./js/way-two.js"></script>
   </body>
 </html>

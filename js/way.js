@@ -1,9 +1,10 @@
 const searchInput = document.getElementById("searchInput");
-const selectElement = document.getElementById("mySelect");
+const selectElementFrom = document.getElementById("mySelectFrom");
+const selectElementTo = document.getElementById("mySelectTo");
 
 searchInput.addEventListener("input", function () {
   const searchTerm = this.value.toLowerCase();
-  const options = selectElement.options;
+  const options = selectElementFrom.options || selectElementTo.options;
 
   for (let i = 0; i < options.length; i++) {
     const optionText = options[i].text.toLowerCase();
@@ -15,13 +16,15 @@ searchInput.addEventListener("input", function () {
   }
 });
 console.log("object");
-const addButton = document.getElementById("addButton");
-const newWayInput = document.getElementById("add-new-way");
+const addButtonFrom = document.getElementById("addButtonFrom");
+const addButtonTo = document.getElementById("addButtonTo");
+const newWayInputFrom = document.getElementById("add-new-way-from");
+const newWayInputTo = document.getElementById("add-new-way-to");
 // const selectElement = document.getElementById("mySelect");
 
 // Функція для додавання нового варіанту в select і localStorage
 function addOption() {
-  const newOption = newWayInput.value;
+  const newOption = newWayInputFrom.value || newWayInputTo.value;
 
   // Перевірка на пустий рядок
   if (newOption.trim() !== "") {
@@ -31,12 +34,12 @@ function addOption() {
     option.text = newOption;
 
     // Додавання опції в select
-    selectElement.appendChild(option);
-
+    selectElementFrom.appendChild(option) &&
+      selectElementTo.appendChild(option);
     // Збереження всіх опцій в localStorage
-    const options = Array.from(selectElement.options).map(
-      (option) => option.value
-    );
+    const options = Array.from(
+      selectElementFrom.options && selectElementTo.options
+    ).map((option) => option.value);
     localStorage.setItem("options", JSON.stringify(options));
 
     // Очищення поля введення
@@ -45,7 +48,7 @@ function addOption() {
 }
 
 // Додаємо слухач подій на кнопку
-addButton.addEventListener("click", addOption);
+addButtonFrom.addEventListener("click", addOption);
 
 // Відновлення опцій з localStorage при завантаженні сторінки
 const storedOptions = JSON.parse(localStorage.getItem("options")) || [];
@@ -53,5 +56,7 @@ storedOptions.forEach((option) => {
   const newOption = document.createElement("option");
   newOption.value = option;
   newOption.text = option;
-  selectElement.appendChild(newOption);
+  selectElementFrom.appendChild(newOption) &&
+    selectElementTo.appendChild(newOption);
 });
+addButtonTo.addEventListener("click", addOption);
