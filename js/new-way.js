@@ -5,7 +5,9 @@ const addButtonFrom = document.getElementById("addButtonFrom");
 const addButtonTo = document.getElementById("addButtonTo");
 const newWayInputFrom = document.getElementById("add-new-way-from");
 const newWayInputTo = document.getElementById("add-new-way-to");
-const searchInput = document.getElementById("searchInput");
+// const searchInput = document.getElementById("searchInput");
+const searchInputFrom = document.getElementById("searchInputFrom");
+const searchInputTo = document.getElementById("searchInputTo");
 
 const startTimeInput = document.getElementById("add-start-time");
 const endTimeInput = document.getElementById("add-end-time");
@@ -80,8 +82,8 @@ addButtonTo.addEventListener("click", addOptionToBoth);
 restoreOptionsFromLocalStorage();
 
 // Функція пошуку для обох select
-searchInput.addEventListener("input", function () {
-  const searchTerm = this.value.toLowerCase();
+function searchOptions(searchInput, selectElement) {
+  const searchTerm = searchInput.value.toLowerCase();
 
   // Функція для фільтрації опцій
   function filterOptions(selectElement) {
@@ -96,12 +98,17 @@ searchInput.addEventListener("input", function () {
       }
     }
   }
-
-  // Фільтруємо опції в обох списках
-  filterOptions(selectElementFrom);
-  filterOptions(selectElementTo);
+  filterOptions(selectElement);
+}
+searchInputFrom.addEventListener("input", function () {
+  searchOptions(this, selectElementFrom);
 });
-
+searchInputTo.addEventListener("input", function () {
+  searchOptions(this, selectElementTo);
+});
+// Фільтруємо опції в обох списках
+// filterOptions(selectElementFrom);
+// filterOptions(selectElementTo);
 // Отримуємо елементи для роботи з пробігом
 const kmStartInput = document.getElementById("km-start");
 const kmEndInput = document.getElementById("km-end");
