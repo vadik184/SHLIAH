@@ -306,10 +306,74 @@ function createEditButton(listItem, data) {
 }
 
 // Функція для включення режиму редагування
-function enableEditing(listItem, data) {
-  listItem.innerHTML = ""; // Очищуємо поточний елемент
+// function enableEditing(listItem, data) {
+//   listItem.innerHTML = ""; // Очищуємо поточний елемент
 
-  const editForm = document.createElement("div");
+//   const editForm = document.createElement("form");
+//   editForm.classList.add("edit-form");
+
+//   // Поля редагування
+//   const fromInput = document.createElement("input");
+//   fromInput.classList.add("edit-input");
+//   fromInput.type = "text";
+//   fromInput.value = data.from;
+
+//   const toInput = document.createElement("input");
+//   toInput.classList.add("edit-input");
+//   toInput.type = "text";
+//   toInput.value = data.to;
+
+//   const startTimeInput = document.createElement("input");
+//   startTimeInput.type = "time";
+//   startTimeInput.value = data.startTime;
+
+//   const endTimeInput = document.createElement("input");
+//   endTimeInput.type = "time";
+//   endTimeInput.value = data.endTime;
+
+//   const timeCase = document.createElement("div");
+//   timeCase.classList.add("time-case");
+
+//   const distanceInput = document.createElement("input");
+//   distanceInput.classList.add("edit-input");
+//   distanceInput.type = "number";
+//   distanceInput.value = data.kmManual || data.kmEnd - data.kmStart || 0;
+
+//   // Кнопка для збереження
+//   const saveButton = document.createElement("button");
+
+//   saveButton.textContent = "ok";
+//   saveButton.classList.add("save-btn");
+//   saveButton.addEventListener("click", function () {
+//     saveEditedData(listItem, data, {
+//       from: fromInput.value,
+//       to: toInput.value,
+//       startTime: startTimeInput.value,
+//       endTime: endTimeInput.value,
+//       kmManual: parseFloat(distanceInput.value) || null,
+//     });
+//   });
+
+//   // Додаємо елементи у форму
+//   editForm.appendChild(fromInput);
+//   editForm.appendChild(toInput);
+//   editForm.appendChild(timeCase);
+//   timeCase.appendChild(startTimeInput);
+//   timeCase.appendChild(endTimeInput);
+//   editForm.appendChild(distanceInput);
+
+//   listItem.appendChild(editForm);
+//   listItem.appendChild(saveButton);
+// }
+function enableEditing(listItem, data) {
+  const currentDataDivs = listItem.querySelectorAll(
+    ".current-way, .current-time, .current-distance"
+  );
+
+  // Очищаємо поточний елемент
+  listItem.innerHTML = "";
+
+  const editForm = document.createElement("form");
   editForm.classList.add("edit-form");
 
   // Поля редагування
@@ -341,7 +405,6 @@ function enableEditing(listItem, data) {
 
   // Кнопка для збереження
   const saveButton = document.createElement("button");
-
   saveButton.textContent = "ok";
   saveButton.classList.add("save-btn");
   saveButton.addEventListener("click", function () {
@@ -367,6 +430,28 @@ function enableEditing(listItem, data) {
 }
 
 // Функція для збереження редагованих даних
+// function saveEditedData(listItem, oldData, newData) {
+//   // Оновлюємо Local Storage
+//   const storedData = JSON.parse(localStorage.getItem("routes")) || [];
+//   const dataIndex = storedData.findIndex(
+//     (data) =>
+//       data.from === oldData.from &&
+//       data.to === oldData.to &&
+//       data.startTime === oldData.startTime &&
+//       data.endTime === oldData.endTime &&
+//       (data.kmManual === oldData.kmManual ||
+//         data.kmEnd - data.kmStart === oldData.kmEnd - oldData.kmStart)
+//   );
+
+//   if (dataIndex !== -1) {
+//     storedData[dataIndex] = { ...storedData[dataIndex], ...newData };
+//     localStorage.setItem("routes", JSON.stringify(storedData));
+//   }
+
+//   // Оновлюємо DOM
+//   listItem.innerHTML = "";
+//   addDataToList(newData);
+// }
 function saveEditedData(listItem, oldData, newData) {
   // Оновлюємо Local Storage
   const storedData = JSON.parse(localStorage.getItem("routes")) || [];
@@ -386,11 +471,69 @@ function saveEditedData(listItem, oldData, newData) {
   }
 
   // Оновлюємо DOM
-  listItem.innerHTML = "";
-  addDataToList(newData);
+  listItem.innerHTML = ""; // Очищаємо старий елемент
+
+  // Додаємо нові дані
+  const routeDiv = document.createElement("div");
+  routeDiv.classList.add("current-way");
+  routeDiv.textContent = `${newData.from} → ${newData.to}`;
+
+  const timeDiv = document.createElement("div");
+  timeDiv.classList.add("current-time");
+  timeDiv.textContent = `${newData.startTime} - ${newData.endTime}`;
+
+  const distanceDiv = document.createElement("div");
+  distanceDiv.classList.add("current-distance");
+  if (newData.kmManual !== null) {
+    distanceDiv.textContent = `${newData.kmManual} км`;
+  } else if (newData.kmStart !== null && newData.kmEnd !== null) {
+    distanceDiv.textContent = `${newData.kmEnd - newData.kmStart} км`;
+  } else {
+    distanceDiv.textContent = "Невідомо";
+  }
+
+  listItem.appendChild(routeDiv);
+  listItem.appendChild(timeDiv);
+  listItem.appendChild(distanceDiv);
+
+  // Додаємо кнопку редагування
+  createEditButton(listItem, newData);
 }
 
 // Оновлюємо функцію додавання даних у список
+// function addDataToList(data) {
+//   clearPlaceholderIfExists(); // Видалити повідомлення, якщо існує
+
+//   const listItem = document.createElement("li");
+//   listItem.classList.add("data-line");
+
+//   const routeDiv = document.createElement("div");
+//   routeDiv.classList.add("current-way");
+//   routeDiv.textContent = `${data.from} → ${data.to}`;
+
+//   const timeDiv = document.createElement("div");
+//   timeDiv.classList.add("current-time");
+//   timeDiv.textContent = `${data.startTime} - ${data.endTime}`;
+
+//   const distanceDiv = document.createElement("div");
+//   distanceDiv.classList.add("current-distance");
+//   if (data.kmManual !== null) {
+//     distanceDiv.textContent = `${data.kmManual} км`;
+//   } else if (data.kmStart !== null && data.kmEnd !== null) {
+//     distanceDiv.textContent = `${data.kmEnd - data.kmStart} км`;
+//   } else {
+//     distanceDiv.textContent = "Невідомо";
+//   }
+
+//   listItem.appendChild(routeDiv);
+//   listItem.appendChild(timeDiv);
+//   listItem.appendChild(distanceDiv);
+
+//   // Додаємо кнопку редагування
+//   createEditButton(listItem, data);
+
+//   mainList.appendChild(listItem);
+// }
 function addDataToList(data) {
   clearPlaceholderIfExists(); // Видалити повідомлення, якщо існує
 
