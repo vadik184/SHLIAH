@@ -116,13 +116,13 @@ function updateKmInfo() {
 
   if (!isNaN(kmManual)) {
     // Якщо є введене значення вручну
-    kmInfo.textContent = `Зазначений пробіг: ${kmManual} км`;
+    kmInfo.textContent = `Зазначена відстань: ${kmManual} км`;
   } else if (kmEnd > kmStart) {
     // Обчислення різниці між пробігом "до" і "після"
     const difference = kmEnd - kmStart;
-    kmInfo.textContent = `Пробіг: ${difference} км`;
+    kmInfo.textContent = `Відстань: ${difference} км`;
   } else {
-    kmInfo.textContent = "Пробіг: невизначено";
+    kmInfo.textContent = "Відстань: невизначено";
   }
 }
 
@@ -140,7 +140,7 @@ function resetForm() {
   kmStartInput.value = "";
   kmEndInput.value = "";
   kmManualInput.value = "";
-  kmInfo.textContent = "Пробіг: невизначено";
+  kmInfo.textContent = "Відстань: невизначено";
 }
 
 // Функція для додавання запису в список
@@ -235,3 +235,33 @@ function restoreDataFromLocalStorage() {
 // Відновлення даних при завантаженні сторінки
 restoreDataFromLocalStorage();
 addPlaceholderIfEmpty();
+
+// Функція для завантаження даних як текстовий файл
+function downloadDataAsText() {
+  const storedData = JSON.parse(localStorage.getItem("routes")) || [];
+  let textContent = storedData
+    .map(
+      (data) =>
+        `Маршрут: ${data.from} → ${data.to}\nЧас: ${data.startTime} - ${
+          data.endTime
+        }\nВідстань: ${
+          data.kmManual || data.kmEnd - data.kmStart || "Невідомо"
+        } км\n`
+    )
+    .join("\n");
+
+  const blob = new Blob([textContent], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "routes.txt";
+  link.click();
+
+  // Очищення Local Storage після завантаження
+  localStorage.removeItem("routes");
+  mainList.innerHTML = ""; // Очищення списку на сторінці
+  addPlaceholderIfEmpty(); // Додавання "порожнього" повідомлення
+}
+
+// Додаємо слухач події на кнопку для експорту
+const exportButton = document.getElementById("export-button");
+exportButton.addEventListener("click", downloadDataAsText);

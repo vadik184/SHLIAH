@@ -27,8 +27,149 @@ button {
 }
 form {
   max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
 }
 input,
 select {
+  /* width: 100%; */
+}
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 10px;
+}
+li {
   width: 100%;
+  border-bottom: 3px solid darkslategray;
+}
+.info-container {
+  width: 100%;
+}
+.main-fildset {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  border: none;
+  background-color: rgb(220, 231, 235);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dist {
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-legend {
+  background-color: aliceblue;
+  padding: 3px 10px;
+  border-radius: 10px;
+  border: 1px solid rgb(177, 207, 233);
+}
+.way-input {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid rgb(102, 119, 135);
+  padding: 3px;
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.main-btn {
+  appearance: button;
+  background-color: #1652f0;
+  border: 1px solid #1652f0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: Graphik, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 1.15;
+  overflow: visible;
+  padding: 10px 26px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transition: all 80ms ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+}
+.main-btn:focus {
+  outline: 0;
+}
+.main-btn:hover {
+  background-color: #0a46e4;
+  border-color: #0a46e4;
+}
+.main-btn:active {
+  background-color: #0430a9;
+  border-color: #0039d7;
+}
+.km-container {
+  display: flex;
+  justify-content: space-between;
+}
+.km-info {
+  background-color: aliceblue;
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+.time-input {
+  min-width: 120px;
+  font-size: 18px;
+  padding: 5px;
+}
+.divider {
+  width: 100%;
+  border-bottom: 2px solid rgb(133, 155, 175);
+}
+.km-input {
+  font-size: 18px;
+  padding: 5px;
+  max-width: 200px;
+}
+
+.placeholder {
+  font-size: 16px;
+  padding-bottom: 5px;
+  color: rgb(177, 176, 176);
+}
+.data-line {
+}
+.current-way {
+  font-size: 18px;
+  font-weight: 400;
+  color: darkslategray;
+}
+.current-time {
+  font-size: 22px;
+  font-weight: 700;
+  color: darkslategray;
+  background-color: rgb(228, 233, 238);
+}
+.current-distance {
+  font-size: 22px;
+  font-weight: 700;
+  color: darkslategray;
+}
+.info-container {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

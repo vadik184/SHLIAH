@@ -15,54 +15,114 @@
   <body>
     <div class="main-container">
       <form action="">
-        <fieldset>
-          <legend>шлях</legend>
-          <fieldset>
+        <fieldset class="main-fildset">
+          <legend class="main-legend">шлях</legend>
+          <fieldset class="dist">
             <legend>звідки</legend>
-            <input type="text" id="searchInput" placeholder="Пошук..." />
-            <select id="mySelectFrom">
+            <input
+              class="way-input"
+              type="text"
+              id="searchInput"
+              placeholder="Пошук..."
+            />
+            <select class="way-input" id="mySelectFrom">
               <option value="">Виберіть шлях</option>
             </select>
             <input
+              class="way-input"
               type="text"
               name="add-new-way-from"
               id="add-new-way-from"
               placeholder="вести новий шлях"
             />
             <label for="add-new-way-from"></label>
-            <input type="button" id="addButtonFrom" value="Додати" />
+            <input
+              class="main-btn"
+              type="button"
+              id="addButtonFrom"
+              value="Додати"
+            />
           </fieldset>
-          <fieldset>
+          <div class="divider"></div>
+          <fieldset class="dist">
             <legend>куди</legend>
-            <input type="text" id="searchInput" placeholder="Пошук..." />
-            <select id="mySelectTo">
+            <input
+              class="way-input"
+              type="text"
+              id="searchInput"
+              placeholder="Пошук..."
+            />
+            <select class="way-input" id="mySelectTo">
               <option value="">Виберіть шлях</option>
             </select>
             <input
+              class="way-input"
               type="text"
               name="add-new-way-to"
               id="add-new-way-to"
               placeholder="вести новий шлях"
             />
             <label for="add-new-way-to"></label>
-            <input type="button" id="addButtonTo" value="Додати" />
+            <input
+              class="main-btn"
+              type="button"
+              id="addButtonTo"
+              value="Додати"
+            />
           </fieldset>
         </fieldset>
-        <fieldset>
-          <legend>час</legend>
-          <label for="add-start-time">час початку</label>
-          <input type="time" name="add-start-time" id="add-start-time" />
-          <label for="add-end-time">час кінця</label>
-          <input type="time" name="add-end-time" id="add-end-time" />
+        <fieldset class="main-fildset">
+          <legend class="main-legend">час</legend>
+          <div class="km-container">
+            <label for="add-start-time">час початку</label>
+            <input
+              class="time-input"
+              type="time"
+              name="add-start-time"
+              id="add-start-time"
+            />
+          </div>
+          <div class="divider"></div>
+          <div class="km-container">
+            <label for="add-end-time">час кінця</label>
+            <input
+              class="time-input"
+              type="time"
+              name="add-end-time"
+              id="add-end-time"
+            />
+          </div>
         </fieldset>
-        <fieldset>
-          <legend>кілометраж</legend>
-          <label for="km">час початку</label>
-          <input type="number" name="km" id="km" />
+        <fieldset class="main-fildset">
+          <legend class="main-legend">кілометраж</legend>
+          <div class="km-container">
+            <label for="km-start">до</label>
+            <input
+              type="number"
+              class="km-input"
+              name="km-start"
+              id="km-start"
+            />
+          </div>
+          <div class="divider"></div>
+          <div class="km-container">
+            <label for="km-end">після</label>
+            <input type="number" class="km-input" name="km-end" id="km-end" />
+          </div>
+          <h3 class="km-info"></h3>
+          <div class="km-container">
+            <label for="km">ввести</label>
+            <input type="number" class="km-input" name="km" id="km" />
+          </div>
         </fieldset>
-        <input type="button" value="готово" />
+        <input class="main-btn" type="button" value="готово" id="save-data" />
       </form>
+      <div class="info-container">
+        <ul id="main-list"></ul>
+        <button class="main-btn" id="export-button">Завантажити дані</button>
+      </div>
     </div>
-    <script src="./js/way-two.js"></script>
+    <!-- <script src="./js/way-two.js"></script> -->
+    <script src="./js/new-way.js"></script>
   </body>
 </html>
